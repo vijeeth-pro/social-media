@@ -13,7 +13,7 @@ function Login() {
     const [form, setFrom] = useState<Payload>({} as Payload)
 
     function handleSubmit(e: React.FormEvent) {
-        e.preventDefault()
+        // e.preventDefault()
 
         // const payload = {
         //     userName: form.userName,
