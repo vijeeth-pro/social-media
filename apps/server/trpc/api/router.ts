@@ -5,7 +5,7 @@ import type { Application } from "express";
 
 import { mergeRouters } from "../trpc";
 
-import { auth } from "./resolvers/user";
+import { auth } from "./router/user";
 
 const appRouter = mergeRouters(auth)
 

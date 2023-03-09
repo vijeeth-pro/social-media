@@ -3,9 +3,9 @@ import { PropsWithChildren } from "react";
 
 import { trpc } from "@trpc";
 
-import { useTrpc } from "hooks";
+import { useTrpc } from "hooks/useTrpc";
 
-import "styles/index.scss";
+
 
 export const Providers = ({ children }: PropsWithChildren) => {
   const { trpcQueryClient, trpcClient } = useTrpc();

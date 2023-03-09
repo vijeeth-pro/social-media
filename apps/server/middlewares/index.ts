@@ -8,5 +8,7 @@ export const middlewares = (app: Application) => {
 
   app.set("trust proxy", true);
 
+  cookieParser.JSONCookie('okay')
+
   initializeTrpc(app);
 };

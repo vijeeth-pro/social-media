@@ -1,27 +1,26 @@
+import { trpc } from "@trpc";
 import React, { useState } from "react";
 
-interface Payload {
-    userName?: string,
-    password1?: string,
-    password2?: string
+type Form = {
+    userName: string,
+    password: string,
 }
 
 function Login() {
 
-    // const { mutate } = trpc.Login.useMutation()
+    const LoginApi = trpc.Login.useMutation()
 
-    const [form, setFrom] = useState<Payload>({} as Payload)
+    const [form, setFrom] = useState<Form>({
+        userName: '',
+        password: ''
+    })
+
+    console.log(LoginApi.data);
 
     function handleSubmit(e: React.FormEvent) {
-        // e.preventDefault()
+        e.preventDefault()
 
-        // const payload = {
-        //     userName: form.userName,
-        //     // password: form.password1 === form.password2 ? form.password1 : null
-        // }
-
-        // const res = mutate(payload)
-        console.log(form);
+        const res = LoginApi.mutate(form)
     }
 
     function handleChange(e: React.FormEvent<HTMLInputElement>) {
@@ -30,19 +29,17 @@ function Login() {
 
 
     return (
+
         <div>
             <h2>Login Pages</h2>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label>userName: </label>
                 <input name="userName" type="text" required onChange={handleChange} />
                 <br />
                 <label>Password: </label>
-                <input name="password1" type="password" required onChange={handleChange} />
+                <input name="password" type="password" required onChange={handleChange} />
                 <br />
-                <label>Confirm Password: </label>
-                <input name="password2" type="password" required onChange={handleChange} />
-                <br />
-                <button type="submit" onSubmit={handleSubmit}>submit</button>
+                <button type="submit">submit</button>
             </form>
         </div>
     )
