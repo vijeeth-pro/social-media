@@ -1,12 +1,8 @@
 import { trpc } from "@trpc";
 import React, { useState } from "react";
+import { Form } from "types/auth";
 
-type Form = {
-    userName: string,
-    password: string,
-}
-
-function Login() {
+const Login: React.FC = () => {
 
     const LoginApi = trpc.Login.useMutation()
 

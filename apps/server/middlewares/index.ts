@@ -1,7 +1,7 @@
 import cookieParser from "cookie-parser";
 import type { Application } from "express";
 
-import { initializeTrpc } from "trpc/api/router";
+import { initializeTrpc } from "../api/router";
 
 export const middlewares = (app: Application) => {
   app.use(cookieParser());

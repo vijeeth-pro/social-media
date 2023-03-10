@@ -1,5 +1,5 @@
-import { router, userProcedure } from "trpc/trpc";
 import { string, z } from 'zod';
+import { router, userProcedure } from "../../trpc";
 
 
 const login = z.object({
@@ -13,6 +13,7 @@ export const auth = router({
         const { input } =  req
         
         return {Name: input.userName}
+        
         }
     )
 })
