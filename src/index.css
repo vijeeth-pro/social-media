@@ -1,0 +1,27 @@
+:root {
+  font-family: Poppins;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --login-background-color: #E5E5E5;
+  --primary-color: #6358DC;
+}
+
+*{
+  /* box-sizing: border-box; */
+  margin: 0;
+  padding: 0;
+}
+
+.AuthLoader{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
