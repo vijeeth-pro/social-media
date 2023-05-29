@@ -51,6 +51,24 @@ export const authSlice = createSlice({
             state.user = null;
             state.logedIn = false;
         })
+
+        //register
+        builder.addMatcher(authApi.endpoints.register.matchFulfilled, (state, action) => {
+
+            localStorage.setItem('refreshToken', action.payload.token.refreshToken);
+
+            state.token = action.payload.token.accessToken;
+            state.user = action.payload.user;
+            state.logedIn = action.payload.success;
+        })
+        builder.addMatcher(authApi.endpoints.register.matchRejected, (state) => {
+                
+            localStorage.removeItem('refreshToken');
+            
+            state.token = null;
+            state.user = null;
+            state.logedIn = false;
+        })
     }
 })
 

@@ -2,7 +2,7 @@ import LoginSide from '@/assets/png/loginside.png'
 import FaceBook from '@/assets/svg/FaceBook'
 import GoogleIcon from '@/assets/svg/Google'
 import { useLoginMutation } from '@/redux/service/auth'
-import { Button, Form, Input } from 'antd'
+import { Button, Form, Input, message } from 'antd'
 import { Link } from 'react-router-dom'
 
 type Props = {}
@@ -28,7 +28,7 @@ export default function Login({}: Props) {
           </div>
           <div className='oath-section'>
             <Button block><i><GoogleIcon /></i>Login with Google</Button>
-            <Button block><i><FaceBook /></i>Login with Github</Button>
+            <Button block onClick={() => message.info('Coming Soon')}><i><FaceBook /></i>Login with Github</Button>
             <div className="hr-sect">Or</div>
           </div>
           <Form name="basic" 

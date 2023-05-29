@@ -1,33 +1,41 @@
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 
+interface Message {
+    message?: string
+    status?: boolean
+}
+
 
 const socket = io(import.meta.env.VITE_SOCKET_URL as string)
 
 function message() {
     const [mess, setMess] = useState("")
+    const [response, setResponse] = useState<Message>({ message: "", status: true})
 
     useEffect(() => {
         socket.on("connect", () => {
-            console.log("connected "+socket.id);
+            // console.log("connected "+socket.id);
         });
         
         if(mess){
-            socket.emit("send-message", mess, socket.id)
+            // console.log(mess);
+            
+            socket.emit("send-message", mess)
         }
         
     }, [mess])
 
     useEffect(() => {
         socket.on('recieve-message', message => {
-            console.log(message)        
+            setResponse(message)        
         })
     }, [])
 
     
     
 
-    return {setMess}
+    return {mess, setMess, response}
 }
 
 
