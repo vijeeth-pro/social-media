@@ -15,7 +15,7 @@ export const authApi = api.injectEndpoints({
                 url: 'auth/reFreshToken',
                 method: 'put',
                 headers: {
-                    authorization: `Bearer ${localStorage.getItem('refreshToken')}`,
+                    authorization: `bearer ${localStorage.key(0)} ${localStorage.getItem('refreshToken') || localStorage.getItem('googleToken')}`,
                 },
             }),
         }),

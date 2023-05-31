@@ -1,7 +1,6 @@
 import '@/style/App.css'
 import {RouterProvider, createBrowserRouter} from 'react-router-dom'
 import { auth, home } from './router'
-import { ConfigProvider, ThemeConfig } from 'antd'
 import { useAuth } from './redux/store/authSlice'
 import { useReFreshTokenMutation } from './redux/service/auth'
 import React from 'react'
@@ -13,22 +12,11 @@ function App() {
   const [reFreshToken, {isLoading}] = useReFreshTokenMutation()
 
   React.useEffect(() => {
-    reFreshToken({})
-  }, [])
-
-  const theme: ThemeConfig = {
-    token: {
-      fontFamily: 'Poppins',
-      colorPrimary: '#6358DC',
-    },
-  }
+    if(localStorage.getItem('refreshToken') || localStorage.getItem('googleToken')) reFreshToken({})
+  }, [])  
   
-
-  return (
-    <ConfigProvider theme={theme}>
-      {isLoading ? <AuthLoad /> : <RouterProvider router={createBrowserRouter(logedIn ? home : auth)}/>}      
-    </ConfigProvider>
-  )
+  return isLoading ? <AuthLoad /> : <RouterProvider router={createBrowserRouter(logedIn ? home : auth)}/>
+  
 }
 
 export default App

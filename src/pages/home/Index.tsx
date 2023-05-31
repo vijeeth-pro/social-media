@@ -1,10 +1,13 @@
-import { Layout, Typography, theme } from 'antd'
-import React from 'react'
+import { Button, Dropdown, Layout, MenuProps, Typography, theme } from 'antd'
+import React, { useEffect, useRef } from 'react'
 import { Menu } from 'antd'
-import { UserOutlined, VideoCameraOutlined, FileSearchOutlined, HomeOutlined, SearchOutlined, ExpandOutlined, NotificationOutlined, ProfileOutlined, ExperimentOutlined, MoreOutlined } from '@ant-design/icons'
-import { Link, Outlet } from 'react-router-dom'
+import { HomeOutlined, SearchOutlined, NotificationOutlined, ProfileOutlined, MoreOutlined } from '@ant-design/icons'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { setAuth } from '@/redux/store/authSlice'
+import UserWindow from '@/hooks/useWindow'
 
-const { Content,  Sider } = Layout
+const { Content,  Sider, Footer } = Layout
 
 const menuItem = [
 
@@ -42,25 +45,56 @@ const menuItem = [
 ]
 
 
+
+
 export default function Index() {
 
   const {
     token: { colorBgContainer, colorBgContainerDisabled },
   } = theme.useToken();
-
+  
+  const disPatch = useDispatch()
+  const naviation = useNavigate()
+  const {dynamicWidth} = UserWindow()
+ 
   const [response, setResponse] = React.useState<boolean>(false)
+  
+  function handleLogout() {
+    disPatch(setAuth({
+      logedIn: false,
+      token: null,
+      user: null,
+    }))
+    
+    naviation('/')
+
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('googleToken');
+  }
+
+  const items: MenuProps['items'] = [
+    {
+      key: '1',
+      label: (
+        <a onClick={() => handleLogout()}>
+          Log out
+        </a>
+      ),
+    },
+  ];
 
   return (
     <Layout>
-      <Sider
+      {dynamicWidth > 588 && <Sider
         style={{ background: colorBgContainer, height: '100vh' }}
         breakpoint="lg"
         collapsedWidth="60"
+        defaultCollapsed={false}
         onBreakpoint={(broken) => {
-          setResponse(broken);
+          setResponse(broken);          
         }}
         onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
+          // console.log(collapsed, type);
         }}
       >
         <div style={{ height: 32, margin: 16, background: colorBgContainerDisabled, textAlign: 'center' }} >{response ? 'L' : <Typography>Logo</Typography> }</div>
@@ -73,23 +107,38 @@ export default function Index() {
                 position: item.key=== "6" ? 'absolute': 'relative', 
                 bottom:  item.key=== "6" ? 20 : 'auto',
               }}
-              onClick={() =>item.key=== "6" && console.log('click')} 
               icon={item.icon}>
                 {item.path ? <Link to={item.path}>
                   <Typography>{item.label}</Typography>
                 </Link> :
-                  <Typography >{item.label}</Typography>
+                  <Dropdown placement='topRight' menu={{ items }} trigger={['click']}>
+                    <Typography >{item.label}</Typography>
+                  </Dropdown>
                 }  
               </Menu.Item>
             )}
         </Menu>
-      </Sider>
+      </Sider>}
+      
       <Layout>
-        <Content >
-          <div style={{ padding: 24, minHeight: '100vh', background: colorBgContainer }}>
+        <Content style={{background: colorBgContainer, height: '95vh'}}>
             <Outlet />
-          </div>
         </Content>
+        {dynamicWidth < 588 &&
+        <Footer style={{padding: 0, display: 'flex', justifyContent: 'center'}}>
+            <Menu
+              mode="horizontal"
+              style={{display: 'flex', justifyContent: 'space-around', width: '100%'}}
+              defaultSelectedKeys={[...(menuItem.map(item => item.path === window.location.pathname && item.key.toString())).toString()]}
+            >
+                {menuItem.map(item => 
+                  <Menu.Item key={item.key} 
+                  icon={item.icon}>
+                  </Menu.Item>
+                )}
+            </Menu>
+        </Footer>
+        }
       </Layout>
     </Layout>
   )

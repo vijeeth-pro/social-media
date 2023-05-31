@@ -33,7 +33,10 @@ export default function Register({}: Props) {
 
   const handleFinish = (values: any) => {
     console.log(values)
-    register(values)
+    const res = register(values).unwrap() as any
+
+    console.log(res.success);
+    
   }
 
   return (

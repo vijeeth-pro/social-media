@@ -3,11 +3,10 @@ import FaceBook from '@/assets/svg/FaceBook'
 import GoogleIcon from '@/assets/svg/Google'
 import { useLoginMutation } from '@/redux/service/auth'
 import { Button, Form, Input, message } from 'antd'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
-type Props = {}
-
-export default function Login({}: Props) {
+export default function Login() {
 
   const [login, { isLoading}] = useLoginMutation()
 

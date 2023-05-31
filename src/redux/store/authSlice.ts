@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { authApi } from "../service/auth";
 import { useSelector } from "react-redux";
 import { RootState } from "..";
+import { useMemo } from "react";
 
 
 export const authSlice = createSlice({
@@ -31,6 +32,7 @@ export const authSlice = createSlice({
         builder.addMatcher(authApi.endpoints.login.matchRejected, (state) => {
 
             localStorage.removeItem('refreshToken');
+            localStorage.removeItem('googleToken');
             
             state.token = null;
             state.user = null;
@@ -46,6 +48,7 @@ export const authSlice = createSlice({
         builder.addMatcher(authApi.endpoints.reFreshToken.matchRejected, (state) => {
 
             localStorage.removeItem('refreshToken');
+            localStorage.removeItem('googleToken');
             
             state.token = null;
             state.user = null;
@@ -75,5 +78,9 @@ export const authSlice = createSlice({
 export const { setAuth } = authSlice.actions;
 
 export const useAuth = () => {
-    return useSelector((state: RootState) => state.auth)
+    const token  = useSelector((state: RootState) => state.auth.token)
+    const user  = useSelector((state: RootState) => state.auth.user)
+    const logedIn  = useSelector((state: RootState) => state.auth.logedIn)
+
+    return useMemo(() => ({ token, user, logedIn }), [token, user, logedIn])
 }

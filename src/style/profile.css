@@ -1,0 +1,26 @@
+.profile-page{
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+}
+
+.profile-content{
+    /* background-color: red; */
+    padding-top: 20px;
+}
+
+.profile-head-content{
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-name{
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-follow{
+    gap: calc(2 vw + 10px);
+    margin-top: 20px;
+}

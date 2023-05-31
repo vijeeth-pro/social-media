@@ -1,12 +1,47 @@
+import { setAuth, useAuth } from '@/redux/store/authSlice'
 import { Layout, Menu, Skeleton } from 'antd'
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 
-const { Header, Content, Footer } = Layout
+const { Header, Content, Footer } = Layout  
 
-type Props = {}
+const Index = () => {  
 
-const Index = (props: Props) => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const {logedIn} = useAuth()
+
+  const useQuery = () => {
+    const {search} = useLocation()
+    return React.useMemo(() => new URLSearchParams(search), [search])
+  }
+
+  const query = useQuery()
+
+
+  React.useEffect(() => {
+    // console.log('Index');
+    
+    const token = query.get('google')
+    const data = query.get('data')
+    const success = query.get('success')
+    
+    if(success === 'true') {
+      token && localStorage.setItem('googleToken', token)
+
+      dispatch(setAuth(
+        {
+          token: token,
+          user: data,
+          logedIn: true
+        }
+      ))
+      
+    } 
+    
+  }, [])
+  
   return (
     <>
          <Header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
