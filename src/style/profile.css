@@ -24,3 +24,104 @@
     gap: calc(2 vw + 10px);
     margin-top: 20px;
 }
+
+.bio-data{
+    margin: 10px 20px;
+}
+
+.bio-category{
+    margin: 2px 0;
+}
+
+.follow-list{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    /* align-items: center; */
+    width: 100%;
+    border-top: 2px solid var(--black-color);
+    /* border-bottom: 2px solid var(--black-color); */
+    padding: 10px 0;
+}
+
+.follow-list p{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post-grid{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0px, 293px));
+    justify-content: center;
+    grid-gap: 18px;
+    border-top: 2px solid var(--primary-color);
+    flex-wrap: wrap;
+}
+.post {
+    cursor: pointer;
+    position: relative;
+    display: block;
+  }
+  .post-image {
+    margin: 0;
+  }
+  .post-image img {
+    width: 100%;
+    vertical-align: top;
+  }
+  .post-overlay {
+    background: rgba(0,0,0, .4);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+  }
+  .post:hover .post-overlay{
+    display: flex;
+  }
+  
+  .post-like,
+  .post-comments {
+    width: 80px;
+    margin: 5px;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+  }
+
+  /* Profile Edit */
+  .edit-page{
+    /* background-color: blue; */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    margin-top: calc(10vh + 20px);
+  }
+
+  .edit-page-form{
+    /* background-color: red; */
+    border-radius: 20px;
+    border: 2px solid var(--primary-color);
+    padding: 30px;
+    width: 500px;
+    height: fit-content;
+  }
+  
+  @media screen and (max-width: 558px) {
+    .post-list {
+      grid-gap: 3px;
+    }
+    .post-grid{
+        grid-gap: 2px;
+    }
+    .edit-page-form{
+      width: calc(100vw - 40px);
+    }
+  }

@@ -14,7 +14,7 @@ type Props = {}
 export default function Register({}: Props) {
 
   const {mess, setMess, response} = Message()
-  const [register, {isLoading, isSuccess, error, isError}] = useRegisterMutation<FetchBaseQueryError | any>()
+  const [register, {isLoading, isError, error}] = useRegisterMutation<FetchBaseQueryError | any>()
   
   const navigation = useNavigate()
 
@@ -22,20 +22,13 @@ export default function Register({}: Props) {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
 
-
-  useEffect(() => {
-    if(isSuccess){
-      navigation('/')
-    }
-  }, [isSuccess])
-  
            
 
-  const handleFinish = (values: any) => {
+  const handleFinish = async(values: any) => {
     console.log(values)
-    const res = register(values).unwrap() as any
+    const res = await register(values).unwrap() as any
 
-    console.log(res.success);
+    res.success && navigation('/')  
     
   }
 
@@ -65,8 +58,8 @@ export default function Register({}: Props) {
 
               name="userId"
               rules={[{ required: true, message: 'Please input your username!' }]}
-              help={mess ? response.message : ""}
-              validateStatus={response.status ? "success" : "error"}
+              help={mess ? response?.message : ""}
+              validateStatus={response?.value ? "success" : "error"}
             >
               <Input placeholder="Username" onChange={(val) => setMess(val.currentTarget.value)} />
             </Form.Item>

@@ -33,7 +33,7 @@ const Index = () => {
       dispatch(setAuth(
         {
           token: token,
-          user: data,
+          user: JSON.parse(data || '{}'),
           logedIn: true
         }
       ))

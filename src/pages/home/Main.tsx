@@ -5,7 +5,7 @@ type Props = {}
 function Main({}: Props) {
 
   return (
-    <div>{JSON.stringify(import.meta.env)}</div>
+    <div>home</div>
   )
 }
 

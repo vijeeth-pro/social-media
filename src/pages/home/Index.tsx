@@ -44,6 +44,34 @@ const menuItem = [
 
 ]
 
+const mobileMenuItem = [
+
+  {
+    key: '1',
+    icon: <HomeOutlined />,
+    label: 'Home',
+    path: '/'
+  },
+  {
+    key: '2',
+    icon: <SearchOutlined />,
+    label: 'Search',
+    path: '/search'
+  },
+  {
+    key: '4',
+    icon: <NotificationOutlined />,
+    label: 'Notification',
+    path: '/notification'
+  },
+  {
+    key: '5',
+    icon: <ProfileOutlined />,
+    label: 'Profile',
+    path: '/profile'
+  },
+]
+
 
 
 
@@ -125,15 +153,16 @@ export default function Index() {
             <Outlet />
         </Content>
         {dynamicWidth < 588 &&
-        <Footer style={{padding: 0, display: 'flex', justifyContent: 'center'}}>
+        <Footer style={{padding: 0, position: 'sticky'}}>
             <Menu
               mode="horizontal"
-              style={{display: 'flex', justifyContent: 'space-around', width: '100%'}}
+              
+              style={{  alignItems: 'center', justifyContent: 'center'}}
               defaultSelectedKeys={[...(menuItem.map(item => item.path === window.location.pathname && item.key.toString())).toString()]}
             >
-                {menuItem.map(item => 
-                  <Menu.Item key={item.key} 
-                  icon={item.icon}>
+                {mobileMenuItem.map(item => 
+                  <Menu.Item key={item.key}>
+                    <Link to={item.path} >{item.icon}</Link>
                   </Menu.Item>
                 )}
             </Menu>

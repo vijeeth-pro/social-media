@@ -1,17 +1,14 @@
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
+import { MessageType, Response } from "@/types";
 
-interface Message {
-    message?: string
-    status?: boolean
-}
 
 
 const socket = io(import.meta.env.VITE_SOCKET_URL as string)
 
-function message() {
+function message():MessageType {
     const [mess, setMess] = useState("")
-    const [response, setResponse] = useState<Message>({ message: "", status: true})
+    const [response, setResponse] = useState<Response>({ message: "", value: true})
 
     useEffect(() => {
         socket.on("connect", () => {

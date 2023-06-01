@@ -5,6 +5,7 @@ import { RootState } from "..";
 import { useMemo } from "react";
 
 
+
 export const authSlice = createSlice({
     name: 'auth',
     initialState: {
@@ -78,9 +79,5 @@ export const authSlice = createSlice({
 export const { setAuth } = authSlice.actions;
 
 export const useAuth = () => {
-    const token  = useSelector((state: RootState) => state.auth.token)
-    const user  = useSelector((state: RootState) => state.auth.user)
-    const logedIn  = useSelector((state: RootState) => state.auth.logedIn)
-
-    return useMemo(() => ({ token, user, logedIn }), [token, user, logedIn])
+    return useSelector((state: RootState) => state.auth)
 }

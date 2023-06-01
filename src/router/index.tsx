@@ -10,6 +10,7 @@ import Main from "@/pages/home/Main";
 import Profile from "@/pages/home/Profile";
 import Search from "@/pages/home/Search";
 import Notification from "@/pages/home/Notification";
+import EditProfile from "@/pages/home/EditProfile";
 
 
 export const auth:RouteObject[] = [
@@ -26,7 +27,7 @@ export const auth:RouteObject[] = [
             {
                 path: '/register',
                 Component: Register,
-                ErrorBoundary: AuthError
+                // ErrorBoundary: AuthError
             }
         ]
     },
@@ -61,7 +62,12 @@ export const home:RouteObject[] = [
                 path: '/notification',
                 Component: Notification,
                 ErrorBoundary: SomeThingError
-            }
+            },
+            {
+                path: '/editProfile',
+                Component: EditProfile,
+                ErrorBoundary: SomeThingError
+            },
         ]
     },
     {
