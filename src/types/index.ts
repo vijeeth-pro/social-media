@@ -7,6 +7,6 @@ export interface Response {
 
 export interface MessageType {
     mess?: string;
-    setMess?: React.Dispatch<React.SetStateAction<string>>;
+    setMess: React.Dispatch<React.SetStateAction<string>>;
     response?: Response;
 }

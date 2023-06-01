@@ -6,7 +6,7 @@ import React from 'react'
 
 function EditProfile() {
 
-    const {mess, setMess, response} = Message()
+    // const {mess, setMess, response} = Message()
 
   return (
     <section className='edit-page'>
