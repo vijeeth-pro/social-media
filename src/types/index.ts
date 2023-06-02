@@ -1,12 +1,12 @@
 import React from 'react';
 
 export interface Response {
-    message?: string;
-    value?: boolean;
+    message: string;
+    status: boolean;
 }
 
 export interface MessageType {
-    mess?: string;
+    mess: string;
     setMess: React.Dispatch<React.SetStateAction<string>>;
-    response?: Response;
+    response: Response;
 }

@@ -8,7 +8,7 @@ const socket = io(import.meta.env.VITE_SOCKET_URL as string)
 
 function message():MessageType {
     const [mess, setMess] = useState("")
-    const [response, setResponse] = useState<Response>({ message: "", value: true})
+    const [response, setResponse] = useState<Response>({ message: "", status: true})
 
     useEffect(() => {
         socket.on("connect", () => {

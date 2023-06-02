@@ -13,10 +13,7 @@ export const authApi = api.injectEndpoints({
         reFreshToken: builder.mutation({
             query: () => ({
                 url: 'auth/reFreshToken',
-                method: 'put',
-                headers: {
-                    authorization: `bearer ${localStorage.key(0)} ${localStorage.getItem('refreshToken') || localStorage.getItem('googleToken')}`,
-                },
+                method: 'PUT',
             }),
         }),
         register: builder.mutation({
@@ -26,6 +23,13 @@ export const authApi = api.injectEndpoints({
                 body: credentials,
             }),
         }),
+        updateProfile: builder.mutation({
+            query: (credentials) => ({
+                url: 'auth/updateProfile',
+                method: 'PUT',
+                body: credentials,
+            }),
+        })
     }),
 })
 
@@ -38,5 +42,5 @@ export const authApi = api.injectEndpoints({
 //     }
 // })
 
-export const { useLoginMutation, useReFreshTokenMutation, useRegisterMutation } = authApi;
+export const { useLoginMutation, useReFreshTokenMutation, useRegisterMutation, useUpdateProfileMutation } = authApi;
 

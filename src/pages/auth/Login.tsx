@@ -2,18 +2,20 @@ import LoginSide from '@/assets/png/loginside.png'
 import FaceBook from '@/assets/svg/FaceBook'
 import GoogleIcon from '@/assets/svg/Google'
 import { useLoginMutation } from '@/redux/service/auth'
-import { Button, Form, Input, message } from 'antd'
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
+import { Button, Form, Input, Typography, message } from 'antd'
 import React, { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 export default function Login() {
 
-  const [login, { isLoading}] = useLoginMutation()
+  const [login, { isLoading, error}] = useLoginMutation<FetchBaseQueryError | any>()
 
   const handleFinish = (values: any) => {
     console.log(values)
     login(values)
   }
+  
 
   return (
     <section className="Login">
@@ -51,9 +53,15 @@ export default function Login() {
               <Input.Password placeholder="Password" />
             </Form.Item>
 
+            {error && <Form.Item>
+              <Typography.Text type='danger'>! {error.data.message}</Typography.Text>
+              </Form.Item>}
+
             <Form.Item>
               <Button block loading={isLoading} disabled={isLoading} type="primary" htmlType="submit">Submit</Button>
             </Form.Item>
+            
+          
             <Form.Item>
               <p>Don’t have an account? <Link to='/register'>Register</Link></p>
             </Form.Item>

@@ -59,7 +59,7 @@ export default function Register({}: Props) {
               name="userId"
               rules={[{ required: true, message: 'Please input your username!' }]}
               help={mess ? response?.message : ""}
-              validateStatus={response?.value ? "success" : "error"}
+              validateStatus={response?.status ? "success" : "error"}
             >
               <Input placeholder="Username" onChange={(val) => setMess(val.currentTarget.value)} />
             </Form.Item>
