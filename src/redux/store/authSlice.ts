@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { authApi } from "../service/auth";
 import { useSelector } from "react-redux";
 import { RootState } from "..";
@@ -78,6 +78,4 @@ export const authSlice = createSlice({
 
 export const { setAuth } = authSlice.actions;
 
-export const useAuth = () => {
-    return useSelector((state: RootState) => state.auth)
-}
+export const useAuth = () => useSelector((state: RootState) => state.auth)

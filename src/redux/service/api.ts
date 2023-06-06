@@ -4,10 +4,10 @@ import { RootState } from '../index';
 const baseQuery = fetchBaseQuery({
     baseUrl: import.meta.env.VITE_LOCAL_URL as string,
     // baseUrl: import.meta.env.VITE_PROD_URL as string,
-    prepareHeaders: (headers, { getState }) => {
-        const token =( getState() as RootState).auth.token;
+    prepareHeaders: (headers, {getState} ) => {
+        const token = ( getState() as RootState).auth.token;
+        console.log('header',token, localStorage.key(0), (getState() as RootState).auth );
         if (token) {
-            console.log(token, localStorage.key(0));
             headers.set('authorization', `bearer ${localStorage.key(0)} ${token}`);
         }
         return headers;
@@ -19,4 +19,5 @@ export const api = createApi({
     baseQuery,
     endpoints: () => ({}),
     tagTypes: [],
+    refetchOnReconnect: false,
 })

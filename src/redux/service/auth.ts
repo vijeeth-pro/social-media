@@ -14,6 +14,9 @@ export const authApi = api.injectEndpoints({
             query: () => ({
                 url: 'auth/reFreshToken',
                 method: 'PUT',
+                headers: {
+                    authorization: `bearer ${localStorage.key(0)} ${localStorage.getItem('refreshToken') || localStorage.getItem('googleToken')}`
+                }
             }),
         }),
         register: builder.mutation({

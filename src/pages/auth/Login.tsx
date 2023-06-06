@@ -54,7 +54,7 @@ export default function Login() {
             </Form.Item>
 
             {error && <Form.Item>
-              <Typography.Text type='danger'>! {error.data.message}</Typography.Text>
+              <Typography.Text type='danger'>! {error.data.message || 'Make sure your email and password is correct'}</Typography.Text>
               </Form.Item>}
 
             <Form.Item>
