@@ -1,11 +1,13 @@
 import { Button, Dropdown, Layout, MenuProps, Typography, theme } from 'antd'
 import React, { useEffect, useRef } from 'react'
 import { Menu } from 'antd'
-import { HomeOutlined, SearchOutlined, NotificationOutlined, ProfileOutlined, MoreOutlined } from '@ant-design/icons'
+import { HomeOutlined, SearchOutlined, NotificationOutlined, ProfileOutlined, MoreOutlined, FileImageOutlined } from '@ant-design/icons'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setAuth } from '@/redux/store/authSlice'
 import UserWindow from '@/hooks/useWindow'
+import FileUploadModal from '@/modal/FileUploadModal'
+import { useUploadPostSeedMutation } from '@/redux/service/auth'
 
 const { Content,  Sider, Footer } = Layout
 
@@ -36,8 +38,13 @@ const menuItem = [
     path: '/profile'
   },
   {
-
     key: '6',
+    icon: <FileImageOutlined />,
+    label: 'Post',
+  },
+  {
+
+    key: '7',
     icon: <MoreOutlined />,
     label: 'More'
   },
@@ -72,20 +79,20 @@ const mobileMenuItem = [
   },
 ]
 
-
-
-
 export default function Index() {
 
   const {
     token: { colorBgContainer, colorBgContainerDisabled },
   } = theme.useToken();
+
+  const [uploadPostSeed] = useUploadPostSeedMutation()
   
   const disPatch = useDispatch()
   const naviation = useNavigate()
   const {dynamicWidth} = UserWindow()
  
   const [response, setResponse] = React.useState<boolean>(false)
+  const [fileModal, setFileModal] = React.useState<boolean>(false)
   
   function handleLogout() {
     disPatch(setAuth({
@@ -98,6 +105,10 @@ export default function Index() {
 
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('googleToken');
+  }
+
+  function handleUploadScreen() {
+    setFileModal(true)
   }
 
   const items: MenuProps['items'] = [
@@ -132,16 +143,21 @@ export default function Index() {
         >
             {menuItem.map(item => 
               <Menu.Item key={item.key} style={{
-                position: item.key=== "6" ? 'absolute': 'relative', 
-                bottom:  item.key=== "6" ? 20 : 'auto',
+                position: item.key=== "7" ? 'absolute': 'relative', 
+                bottom:  item.key=== "7" ? 20 : 'auto',
               }}
+              
+              onClick={() => item.key === "6" ? handleUploadScreen() : null}
               icon={item.icon}>
                 {item.path ? <Link to={item.path}>
                   <Typography>{item.label}</Typography>
                 </Link> :
+                  item.label === 'More' ?
                   <Dropdown placement='topRight' menu={{ items }} trigger={['click']}>
                     <Typography >{item.label}</Typography>
                   </Dropdown>
+                  :
+                  <Typography>{item.label}</Typography>
                 }  
               </Menu.Item>
             )}
@@ -169,6 +185,7 @@ export default function Index() {
         </Footer>
         }
       </Layout>
+      <FileUploadModal open={fileModal} onClose={() => setFileModal(false)}  uploadPostSeed={uploadPostSeed}/>
     </Layout>
   )
 }

@@ -31,19 +31,17 @@ export const authApi = api.injectEndpoints({
                 url: 'auth/updateProfile',
                 method: 'PUT',
                 body: credentials,
+            }), 
+        }),
+        uploadPostSeed: builder.mutation({
+            query: (payload) => ({
+                url: 'auth/uploadPostSeed',
+                method: 'POST',
+                body: payload,
             }),
-        })
+        }),   
     }),
 })
 
-// api.enhanceEndpoints({
-//     addTagTypes: ['Auth'],
-//     endpoints: {
-//         login: {
-//             invalidatesTags: ['Auth'],
-//         },
-//     }
-// })
-
-export const { useLoginMutation, useReFreshTokenMutation, useRegisterMutation, useUpdateProfileMutation } = authApi;
+export const { useLoginMutation, useReFreshTokenMutation, useRegisterMutation, useUpdateProfileMutation, useUploadPostSeedMutation } = authApi;
 

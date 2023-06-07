@@ -6,7 +6,7 @@ const baseQuery = fetchBaseQuery({
     // baseUrl: import.meta.env.VITE_PROD_URL as string,
     prepareHeaders: (headers, {getState} ) => {
         const token = ( getState() as RootState).auth.token;
-        console.log('header',token, localStorage.key(0), (getState() as RootState).auth );
+        // console.log('header',token, localStorage.key(0), (getState() as RootState).auth );
         if (token) {
             headers.set('authorization', `bearer ${localStorage.key(0)} ${token}`);
         }
@@ -18,6 +18,6 @@ export const api = createApi({
     reducerPath: 'api',
     baseQuery,
     endpoints: () => ({}),
-    tagTypes: [],
+    tagTypes: ['Auth'],
     refetchOnReconnect: false,
 })

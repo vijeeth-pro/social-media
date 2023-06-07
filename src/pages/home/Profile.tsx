@@ -54,7 +54,7 @@ function Profile({}: Props) {
                   <Space size='large'>
                   <Typography>
                     <Typography.Title level={5} style={{marginTop: 6, marginBottom: 6}}>{user.name}<EditOutlined onClick={() => navigate('/editProfile')} style={{cursor: 'pointer', marginLeft: 10}}/></Typography.Title>
-                    <Typography.Title level={5} className='bio-category' style={{margin: 0}}>Frontend Developer</Typography.Title>
+                    <Typography.Title level={5} className='bio-category' style={{margin: 0}}>{user.category}</Typography.Title>
                     {lines.map((line:string, index:number) => (
                       <Typography.Paragraph style={{ marginBottom: 0 }} key={index}>{line}</Typography.Paragraph>
                     ))}
