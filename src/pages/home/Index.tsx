@@ -85,7 +85,7 @@ export default function Index() {
     token: { colorBgContainer, colorBgContainerDisabled },
   } = theme.useToken();
 
-  const [uploadPostSeed] = useUploadPostSeedMutation()
+  
   
   const disPatch = useDispatch()
   const naviation = useNavigate()
@@ -185,7 +185,7 @@ export default function Index() {
         </Footer>
         }
       </Layout>
-      <FileUploadModal open={fileModal} onClose={() => setFileModal(false)}  uploadPostSeed={uploadPostSeed}/>
+      <FileUploadModal open={fileModal} onClose={() => setFileModal(false)}/>
     </Layout>
   )
 }
