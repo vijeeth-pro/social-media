@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux'
 import { setAuth } from '@/redux/store/authSlice'
 import UserWindow from '@/hooks/useWindow'
 import FileUploadModal from '@/modal/FileUploadModal'
-import { useUploadPostSeedMutation } from '@/redux/service/auth'
 
 const { Content,  Sider, Footer } = Layout
 
@@ -32,15 +31,15 @@ const menuItem = [
     path: '/notification'
   },
   {
+    key: '6',
+    icon: <FileImageOutlined />,
+    label: 'Post',
+  },
+  {
     key: '5',
     icon: <ProfileOutlined />,
     label: 'Profile',
     path: '/profile'
-  },
-  {
-    key: '6',
-    icon: <FileImageOutlined />,
-    label: 'Post',
   },
   {
 
@@ -185,7 +184,7 @@ export default function Index() {
         </Footer>
         }
       </Layout>
-      <FileUploadModal open={fileModal} onClose={() => setFileModal(false)}/>
+      <FileUploadModal open={fileModal} setFileModal={setFileModal}/>
     </Layout>
   )
 }

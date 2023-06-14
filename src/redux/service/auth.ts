@@ -10,13 +10,13 @@ export const authApi = api.injectEndpoints({
                 body: credentials,
             }),
         }),
-        reFreshToken: builder.mutation({
+
+        reFreshToken: builder.query({
             query: () => ({
                 url: 'auth/reFreshToken',
-                method: 'PUT',
                 headers: {
-                    authorization: `bearer ${localStorage.key(0)} ${localStorage.getItem('refreshToken') || localStorage.getItem('googleToken')}`
-                }
+                    authorization: `bearer ${localStorage.key(0)} ${localStorage.getItem('googleToken')|| localStorage.getItem('refreshToken')}`,
+                },
             }),
         }),
         register: builder.mutation({
@@ -33,15 +33,23 @@ export const authApi = api.injectEndpoints({
                 body: credentials,
             }), 
         }),
+        uploadVideo: builder.mutation({
+            query: (payload) => ({
+                url: 'auth/uploadVideo',
+                method: 'POST',
+                body: payload,
+            }),
+        }),   
         uploadPostSeed: builder.mutation({
             query: (payload) => ({
                 url: 'auth/uploadPostSeed',
                 method: 'POST',
                 body: payload,
             }),
-        }),   
+            // invalidatesTags: ['Auth'],
+        }),
     }),
 })
 
-export const { useLoginMutation, useReFreshTokenMutation, useRegisterMutation, useUpdateProfileMutation, useUploadPostSeedMutation } = authApi;
+export const { useLoginMutation, useReFreshTokenQuery, useRegisterMutation, useUpdateProfileMutation, useUploadVideoMutation, useUploadPostSeedMutation } = authApi;
 

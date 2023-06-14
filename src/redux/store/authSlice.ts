@@ -79,6 +79,11 @@ export const authSlice = createSlice({
                     
             state.user = action.payload.user;
         })
+
+        builder.addMatcher(authApi.endpoints.uploadPostSeed.matchFulfilled, (state, action) => {
+
+            state.user = action.payload.user;
+        })
             
     }
 })

@@ -28,7 +28,7 @@ export default function Login() {
               </span> </h4>
           </div>
           <div className='oath-section'>
-            <Button block onClick={() => window.location.replace(`${import.meta.env.VITE_LOCAL_URL}/auth/oauth/google`)}><i><GoogleIcon /></i>Login with Google</Button>
+            <Button block onClick={() => window.location.replace(`${import.meta.env.VITE_BASE_URL}/auth/oauth/google`)}><i><GoogleIcon /></i>Login with Google</Button>
             <Button block onClick={() => message.info('Coming Soon')}><i><FaceBook /></i>Login with Github</Button>
             <div className="hr-sect">Or</div>
           </div>
